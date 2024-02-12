@@ -27,7 +27,7 @@ import java.util.Map;
 @RequestMapping("/repodata")
 public class FetchRepoData {
 //    Obtain and define your own API KEY to improve app functionality, otherwise analysis of users with large
-//    repository pools will lead to error 403 from github timeout
+//    repository pools will lead to error 403 from github timeout.
     @Value("${github_API_KEY}")
     private String githubKey;
 
