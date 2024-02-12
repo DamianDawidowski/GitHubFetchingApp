@@ -8,6 +8,7 @@ import application.githubfetch.models.RepositoryData;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +28,8 @@ import java.util.Map;
 public class FetchRepoData {
 //    Obtain and define your own API KEY to improve app functionality, otherwise analysis of users with large
 //    repository pools will lead to error 403 from github timeout
-//    @Value("${github_API_KEY}")
-//    private String githubKey;
+    @Value("${github_API_KEY}")
+    private String githubKey;
 
     @RequestMapping("/{ownerName}")
     public AllRepositoriesData getAllRepositoriesData(@PathVariable("ownerName") String ownerName) {
@@ -55,7 +56,7 @@ public class FetchRepoData {
                 .headers(httpHeaders -> {
                     httpHeaders.add("Accept", "application/json");
 //                    enable the header for github API key if you have one
-//                    httpHeaders.setBearerAuth(githubKey);
+                    httpHeaders.setBearerAuth(githubKey);
                 })
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, response -> response.bodyToMono(String.class) // error body as String or other class
@@ -117,7 +118,7 @@ public class FetchRepoData {
                         .headers(httpHeaders -> {
                             httpHeaders.add("Accept", "application/json");
 //                              enable the header for github API key if you have one
-//                            httpHeaders.setBearerAuth(githubKey);
+                            httpHeaders.setBearerAuth(githubKey);
                         })
                         .retrieve()
                         .onStatus(HttpStatusCode::isError, response -> response.bodyToMono(String.class)
