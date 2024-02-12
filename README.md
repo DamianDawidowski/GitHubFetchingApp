@@ -20,7 +20,7 @@ Start the backend server
 The app provides a GET service, available at:
 http://localhost:8080/repodata/{username}
 
-Insert {username} as the name of the GitHub user you want to test
+Insert {username} as the name of the GitHub user you want to test.
 
 As an option, you can include your own GitHub access token to avoid the App's 404 errors from Github blocking further requests due to reaching internal API rate limit.
 You can enable the option in the FetchRepositoriesData class, following the relevant comments in code.
