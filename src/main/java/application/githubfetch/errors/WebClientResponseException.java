@@ -10,6 +10,5 @@ public class WebClientResponseException extends RuntimeException {
     public WebClientResponseException(String message, int code) {
         super(message);
         this.code = code;
-
     }
 }

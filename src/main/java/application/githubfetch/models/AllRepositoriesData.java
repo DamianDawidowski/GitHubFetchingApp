@@ -8,6 +8,7 @@ public class AllRepositoriesData {
     public AllRepositoriesData() {
         AllRepositoriesData = new ArrayList<RepositoryData>();
     }
+
     public AllRepositoriesData(ArrayList<RepositoryData> allReposData) {
         AllRepositoriesData = AllRepositoriesData;
     }

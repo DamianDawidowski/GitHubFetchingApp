@@ -24,7 +24,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/repodata")
-public class FetchRepoData {
+public class FetchRepositoriesData {
 //    Obtain and define your own API KEY to improve app functionality, otherwise analysis of users with large
 //    repository pools will lead to error 403 from github timeout
 //    @Value("${github_API_KEY}")
@@ -46,7 +46,7 @@ public class FetchRepoData {
 
             WebClient.Builder builder = WebClient.builder();
 
-            String repoData ="";
+            String repoData;
 
             repoData = builder
                 .build()
@@ -60,7 +60,7 @@ public class FetchRepoData {
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, response -> response.bodyToMono(String.class) // error body as String or other class
                     .flatMap(error -> {
-                        Map<String, Object> errorDataList = new LinkedHashMap<>();
+                        Map<String, Object> errorDataList;
 
                         try {
                         errorDataList = objectMapper.readValue(error, new TypeReference<Map<String, Object>>() {
@@ -79,7 +79,7 @@ public class FetchRepoData {
                 .bodyToMono(String.class)
                 .block();
 
-            List<Map<String, Object>> listOfRepos = new ArrayList<>();
+            List<Map<String, Object>> listOfRepos;
 
             try {
                 listOfRepos = objectMapper.readValue(repoData, new TypeReference<>() {
@@ -92,7 +92,7 @@ public class FetchRepoData {
             for (Map<String, Object> repo : listOfRepos) {
                 String ownerLogin = "";
 
-                String repositoryName = "";
+                String repositoryName;
 
                 ArrayList<BranchData> allBranchesData = new ArrayList<>();
 
@@ -122,7 +122,7 @@ public class FetchRepoData {
                         .retrieve()
                         .onStatus(HttpStatusCode::isError, response -> response.bodyToMono(String.class)
                             .flatMap(error -> {
-                                Map<String, Object> errorDataList = new LinkedHashMap<>();
+                                Map<String, Object> errorDataList;
 
                                 try {
                                     errorDataList = objectMapper.readValue(error, new TypeReference<Map<String, Object>>() {
@@ -140,7 +140,7 @@ public class FetchRepoData {
                         .bodyToMono(String.class)
                         .block();
 
-                    List<Map<String, Object>> listOfBranches = new ArrayList<>();
+                    List<Map<String, Object>> listOfBranches;
 
                     try {
                         listOfBranches = objectMapper.readValue(branchesData, new TypeReference<List<Map<String, Object>>>() {
